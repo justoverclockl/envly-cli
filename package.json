@@ -1,0 +1,57 @@
+{
+  "name": "@envly/cli",
+  "version": "0.0.1",
+  "description": "Official CLI for Envly",
+  "type": "module",
+  "bin": {
+    "envly": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsx --env-file=.env src/index.ts",
+    "build": "tsup src/index.ts --format esm --clean",
+    "typecheck": "tsc --noEmit",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "npm run build && changeset publish"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justoverclockl/envly-cli.git"
+  },
+  "homepage": "https://github.com/justoverclockl/envly-cli#readme",
+  "bugs": {
+    "url": "https://github.com/justoverclockl/envly-cli/issues"
+  },
+  "keywords": [
+    "envly",
+    "env",
+    "cli",
+    "environment-variables",
+    "dotenv"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@inquirer/prompts": "^8.7.2",
+    "commander": "^14.0.0",
+    "figlet": "^1.12.0",
+    "gradient-string": "^3.0.0",
+    "jszip": "^3.10.2"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^3.0.3",
+    "@types/figlet": "^1.7.0",
+    "@types/node": "^24.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.23.15",
+    "typescript": "^5.0.0"
+  }
+}

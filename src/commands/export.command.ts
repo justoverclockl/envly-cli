@@ -11,6 +11,7 @@ import type {
 } from '../api/types.js'
 import { handleCommandError } from '../errors/command-error.js'
 import { createEnvironmentArchive } from '../export/environment-archive.js'
+import chalk from "chalk";
 
 type ExportOptions = {
     project: string
@@ -84,13 +85,13 @@ Examples:
                 })
 
                 console.log(
-                    `Environment variables exported to ${outputPath}`,
+                    chalk.green(`Environment variables exported to ${outputPath}`),
                 )
             } catch (error) {
                 if (isFileExistsError(error)) {
-                    console.error(
-                        `Export failed: ${outputPath} already exists. ` +
-                        'Use --force to overwrite it.',
+                    console.log(
+                        chalk.red(`Export failed: ${outputPath} already exists. ` +
+                            'Use --force to overwrite it.')
                     )
                     process.exitCode = 1
                     return

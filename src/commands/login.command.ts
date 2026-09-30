@@ -3,6 +3,7 @@ import {Command} from 'commander'
 import {saveCredentials} from '../auth/credentials.js'
 import {handleCommandError} from '../errors/command-error.js'
 import {browserLogin} from '../auth/browser-login.js'
+import chalk from "chalk";
 
 export const loginCommand =
     new Command('login')
@@ -17,7 +18,7 @@ export const loginCommand =
         .action(async () => {
             try {
                 console.log(
-                    'Opening Envly in your browser...',
+                    chalk.yellow('Opening Envly in your browser...'),
                 )
 
                 const {
@@ -29,7 +30,7 @@ export const loginCommand =
                 })
 
                 console.log(
-                    'Logged in successfully.',
+                    chalk.green('Logged in successfully.'),
                 )
             } catch (error) {
                 handleCommandError(error, {

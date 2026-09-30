@@ -4,6 +4,7 @@ import {
     clearCredentials,
 } from '../auth/credentials.js'
 import { handleCommandError } from '../errors/command-error.js'
+import chalk from "chalk";
 
 export const logoutCommand =
     new Command('logout')
@@ -20,7 +21,7 @@ Examples:
                 await clearCredentials()
 
                 console.log(
-                    'Logged out successfully.',
+                    chalk.red('Logged out successfully from envly.'),
                 )
             } catch (error) {
                 handleCommandError(error, {

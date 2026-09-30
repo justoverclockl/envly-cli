@@ -4,6 +4,7 @@ import {
     getCurrentUser,
 } from '../api/auth.api.js'
 import { handleCommandError } from '../errors/command-error.js'
+import chalk from "chalk";
 
 export const whoamiCommand =
     new Command('whoami')
@@ -22,7 +23,17 @@ Examples:
                 const user =
                     await getCurrentUser()
 
-                console.log(user.email)
+                console.log(
+                    chalk.magentaBright(
+                        `Logged in as ${user.username} `
+                    )
+                )
+                console.log(
+                    chalk.magentaBright(
+                        `Email ${user.email}`
+                    )
+                )
+
             } catch (error) {
                 handleCommandError(error, {
                     operation: 'Whoami',

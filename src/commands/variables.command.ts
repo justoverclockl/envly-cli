@@ -1,5 +1,6 @@
 import { Command } from 'commander'
-
+import chalk from 'chalk';
+import chalkTable from 'chalk-table';
 import { getEnvironments } from '../api/environments.api.js'
 import { getVariables } from '../api/variables.api.js'
 import type {
@@ -78,15 +79,21 @@ const printEnvironmentVariables = (
     environmentName: Environment['name'],
     variables: EnvironmentVariable[],
 ) => {
-    console.log(environmentName)
+    console.log(chalk.bgMagenta(environmentName))
 
-    if (variables.length === 0) {
-        console.log('  (no variables)')
-    } else {
-        variables.forEach((variable) => {
-            console.log(`  ${variable.key}=${variable.value}`)
-        })
+    const options = {
+        leftPad: 2,
+        columns: [
+            { field: 'key', name: chalk.cyan('key') },
+            { field: 'value', name: chalk.magenta('value') },
+        ]
     }
 
-    console.log()
+    if (variables.length === 0) {
+        console.log(chalk.red('  (no variables)'))
+    } else {
+        const table = chalkTable(options, variables)
+        console.log(table)
+
+    }
 }

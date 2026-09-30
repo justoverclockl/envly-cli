@@ -1,5 +1,11 @@
 # @envly/cli
 
+## 0.2.0
+
+### Minor Changes
+
+- 4855af8: Implement the new login system that open directly the envly login page inside the browser
+
 ## 0.1.1
 
 ### Patch Changes

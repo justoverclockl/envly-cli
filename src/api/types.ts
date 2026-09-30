@@ -14,6 +14,16 @@ export type LoginResponse = {
     pendingPlan: string | null
 }
 
+export type CliTokenExchangePayload = {
+    code: string
+    codeVerifier: string
+}
+
+export type CliTokenExchangeResponse = {
+    statusCode: number
+    token: string
+}
+
 export type CurrentUser = {
     id: string
     username: string

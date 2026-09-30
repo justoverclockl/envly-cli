@@ -1,12 +1,8 @@
-import { Command } from 'commander'
-import {
-    input,
-    password,
-} from '@inquirer/prompts'
+import {Command} from 'commander'
 
-import { login } from '../api/auth.api.js'
-import { saveCredentials } from '../auth/credentials.js'
-import { handleCommandError } from '../errors/command-error.js'
+import {saveCredentials} from '../auth/credentials.js'
+import {handleCommandError} from '../errors/command-error.js'
+import {browserLogin} from '../auth/browser-login.js'
 
 export const loginCommand =
     new Command('login')
@@ -14,28 +10,22 @@ export const loginCommand =
         .addHelpText(
             'after',
             `
-Examples:
-  $ envly login
-`,
+                Examples:
+                  $ envly login
+                `,
         )
         .action(async () => {
             try {
-                const email = await input({
-                    message: 'Email:',
-                })
+                console.log(
+                    'Opening Envly in your browser...',
+                )
 
-                const userPassword = await password({
-                    message: 'Password:',
-                    mask: '*',
-                })
-
-                const response = await login({
-                    email,
-                    password: userPassword,
-                })
+                const {
+                    token,
+                } = await browserLogin()
 
                 await saveCredentials({
-                    token: response.token,
+                    token,
                 })
 
                 console.log(
@@ -44,10 +34,6 @@ Examples:
             } catch (error) {
                 handleCommandError(error, {
                     operation: 'Login',
-                    statusMessages: {
-                        401: 'invalid email or password.',
-                        429: 'too many attempts. Please try again later.',
-                    },
                 })
             }
         })

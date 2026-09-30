@@ -45,14 +45,17 @@ Run `npm unlink --global @envly/cli` to remove the linked executable.
 
 ## Authentication
 
-Log in interactively with your Envly email and password:
+Open Envly in your browser and authenticate with your email and password or
+Google:
 
 ```shell
 envly login
 ```
 
-The access token is stored locally in `~/.envly/config.json` and is sent as a
-Bearer token with authenticated requests.
+The browser returns a short-lived, single-use authorization code to the CLI.
+The CLI exchanges it using PKCE, then stores the resulting access token in
+`~/.envly/config.json`. The token is sent as a Bearer token with authenticated
+requests.
 
 Check the currently authenticated user:
 
